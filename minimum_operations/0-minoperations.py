@@ -15,8 +15,8 @@ def minOperations(n):
     """
     Calculate the minimum number of operations needed to get n 'H' characters.
 
-    Starting with a single 'H', this function determines the fewest number
-    of Copy All and Paste operations required to reach exactly n 'H' characters.
+    Starting with a single 'H', this function determines the fewest number of
+    Copy All and Paste operations required to reach exactly n 'H' characters.
 
     The strategy relies on breaking n down into its prime factors.
     The sum of these factors represents the minimum number of operations.
