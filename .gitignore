@@ -5,3 +5,4 @@ heap_insert/0-main.c
 .gitignore
 heap_insert/0-binary_tree_node.o
 heap_insert/1-heap_insert
+.vscode/settings.json
