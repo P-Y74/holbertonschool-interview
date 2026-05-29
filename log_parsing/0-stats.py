@@ -1,4 +1,14 @@
 #!/usr/bin/python3
+"""
+Reads log lines from standard input and computes metrics.
+
+The script tracks:
+- Total file size
+- Number of occurrences of each valid HTTP status code
+
+Statistics are printed every 10 processed lines and on
+keyboard interruption (CTRL + C).
+"""
 
 import sys
 
@@ -19,6 +29,14 @@ line_count = 0
 
 
 def print_stats():
+    """
+    Print the accumulated log statistics.
+
+    Displays the total file size and the number of
+    occurrences for each valid HTTP status code.
+    Only status codes with a count greater than zero
+    are printed.
+    """
     print(f"File size: {total_size}")
 
     for code in sorted(status_counts.keys()):
