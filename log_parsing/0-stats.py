@@ -61,6 +61,9 @@ def main():
         print_stats()
         raise
 
+    if line_count > 0 and line_count % 10 != 0:
+        print_stats()
+
 
 def print_stats():
     """
