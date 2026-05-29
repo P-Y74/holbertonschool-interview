@@ -28,6 +28,40 @@ status_counts = {
 line_count = 0
 
 
+def main():
+    """
+    Process log entries from standard input.
+
+    Reads each log line, extracts the status code and file size,
+    updates the accumulated metrics, and prints statistics every
+    10 processed lines. If a keyboard interruption occurs,
+    current statistics are printed before exiting.
+    """
+    global total_size
+    global line_count
+
+    try:
+        for line in sys.stdin:
+            line_count += 1
+            parts = line.split()
+            try:
+                status_code = parts[-2]
+                size = int(parts[-1])
+            except (IndexError, ValueError):
+                continue
+
+            total_size += size
+
+            if status_code in status_counts:
+                status_counts[status_code] += 1
+
+            if line_count % 10 == 0:
+                print_stats()
+    except KeyboardInterrupt:
+        print_stats()
+        raise
+
+
 def print_stats():
     """
     Print the accumulated log statistics.
@@ -44,23 +78,5 @@ def print_stats():
             print(f"{code}: {status_counts[code]}")
 
 
-try:
-    for line in sys.stdin:
-        line_count += 1
-        parts = line.split()
-        try:
-            status_code = parts[-2]
-            size = int(parts[-1])
-        except (IndexError, ValueError):
-            continue
-
-        total_size += size
-
-        if status_code in status_counts:
-            status_counts[status_code] += 1
-
-        if line_count % 10 == 0:
-            print_stats()
-except KeyboardInterrupt:
-    print_stats()
-    raise
+if __name__ == "__main__":
+    main()
