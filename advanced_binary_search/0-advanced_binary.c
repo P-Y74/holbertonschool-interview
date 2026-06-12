@@ -22,18 +22,17 @@ void print_array(int *array, size_t left, size_t right)
 }
 
 /**
- * binary_search - recursively searches for the first occurrence of a value
- * @array: pointer to the first element of the array
- * @left: left index of the current search range
- * @right: right index of the current search range
+ * binary_search - recursively searches for first occurrence
+ * @array: array to search in
+ * @left: left index
+ * @right: right index
  * @value: value to search for
  *
- * Return: index of the first occurrence of value, or -1 if not found
+ * Return: first index of value, or -1
  */
 int binary_search(int *array, size_t left, size_t right, int value)
 {
 	size_t mid;
-	int found;
 
 	if (left > right)
 		return (-1);
@@ -42,23 +41,12 @@ int binary_search(int *array, size_t left, size_t right, int value)
 
 	mid = left + (right - left) / 2;
 
-	if (array[mid] == value)
+	if (array[mid] >= value)
 	{
 		if (mid == left)
-			return ((int)mid);
+			return (array[mid] == value ? (int)mid : -1);
 
-		found = binary_search(array, left, mid, value);
-		if (found != -1)
-			return (found);
-
-		return ((int)mid);
-	}
-
-	if (array[mid] > value)
-	{
-		if (mid == 0)
-			return (-1);
-		return (binary_search(array, left, mid - 1, value));
+		return (binary_search(array, left, mid, value));
 	}
 
 	return (binary_search(array, mid + 1, right, value));
