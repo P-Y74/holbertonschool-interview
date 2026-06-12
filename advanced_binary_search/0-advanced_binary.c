@@ -33,6 +33,7 @@ void print_array(int *array, size_t left, size_t right)
 int binary_search(int *array, size_t left, size_t right, int value)
 {
 	size_t mid;
+	int result;
 
 	if (left > right)
 		return (-1);
@@ -41,14 +42,20 @@ int binary_search(int *array, size_t left, size_t right, int value)
 
 	mid = left + (right - left) / 2;
 
-	if (array[mid] == value && (mid == 0 || array[mid - 1] != value))
-		return ((int)mid);
-
 	if (array[mid] >= value)
 	{
 		if (mid == 0)
-			return (-1);
-		return (binary_search(array, left, mid - 1, value));
+			return (array[mid] == value ? (int)mid : -1);
+
+		result = binary_search(array, left, mid, value);
+
+		if (result != -1)
+			return (result);
+
+		if (array[mid] == value)
+			return ((int)mid);
+
+		return (-1);
 	}
 
 	return (binary_search(array, mid + 1, right, value));
