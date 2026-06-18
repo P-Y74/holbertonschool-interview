@@ -1,7 +1,46 @@
 #include "holberton.h"
 #include <stdlib.h>
 
+/**
+ * _strlen - returns the length of a string
+ * @s: string to measure
+ *
+ * Return: length of the string
+ */
+int _strlen(char *s)
+{
+	int len;
 
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+
+	return (len);
+}
+
+/**
+ * is_digit_string - checks if a string contains only digits
+ * @s: string to check
+ *
+ * Return: 1 if the string contains only digits, 0 otherwise
+ */
+int is_digit_string(char *s)
+{
+	int i;
+
+	i = 0;
+	if (s == NULL || s[0] == '\0')
+		return (0);
+
+	while (s[i] != '\0')
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+
+	return (1);
+}
 
 /**
  * print_error - prints Error and exits with status 98
